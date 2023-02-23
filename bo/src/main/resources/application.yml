@@ -19,3 +19,5 @@ spring:
     hibernate:
       ddl-auto: create
   custom:
+    jwt:
+      secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey

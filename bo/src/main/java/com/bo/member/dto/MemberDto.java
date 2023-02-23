@@ -1,5 +1,6 @@
 package com.bo.member.dto;
 
+import com.bo.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,20 @@ public class MemberDto {
     private Long memberIdx;
     private String username;
     private String password;
-    private long deptId;
+    private Long deptId;
     private String name;
     private String gender;
+    private String role;
+
+    public Member toEntity() {
+        return Member.builder()
+                .memberIdx(this.getMemberIdx())
+                .username(this.getUsername())
+                .password(this.getPassword())
+                .deptId(this.getDeptId())
+                .name(this.getName())
+                .gender(this.getGender())
+                .role(this.getRole())
+                .build();
+    }
 }
