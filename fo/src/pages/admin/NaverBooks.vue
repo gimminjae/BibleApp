@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-center mt-5">
       <div class="d-flex" style="width: 50%;">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="keyword"
+        <input class="form-control me-2" type="search" placeholder="검색어를 입력하세요." aria-label="Search" v-model="keyword"
                @keyup.enter="submit_form()">
         <button class="btn btn-outline-success" type="button" @click="submit_form()">Search</button>
       </div>
@@ -14,7 +14,7 @@
 
         <div>
           <div class="col" v-for="book in bookList" :key="book">
-            <AppCard :book="book"></AppCard>
+            <NaverBook :book="book"></NaverBook>
           </div>
 
         </div>
@@ -25,12 +25,12 @@
 </template>
 <script>
 import axios from "axios";
-import AppCard from "@/components/AppCard.vue";
 import VueCookies from "vue-cookies";
+import NaverBook from "@/components/NaverBook.vue";
 
 export default {
-  name: "AppHome",
-  components: {AppCard},
+  name: "NaverBooks",
+  components: {NaverBook},
   data() {
     return {
       keyword: "",
@@ -39,8 +39,12 @@ export default {
   },
   methods: {
     submit_form() {
-      axios.get("/api/book?keyword=" + this.keyword).then(({data}) => {
-        this.bookList = data;
+      axios.get("/api/admin/naver/search/book?keyword=" + this.keyword, {
+        headers: {
+          "Authorization": VueCookies.get('access_token')
+        }
+      }).then(({data}) => {
+        this.bookList = data.items;
       })
           .catch(error => {
             console.log(error);
@@ -48,17 +52,6 @@ export default {
     }
   },
   mounted() {
-    let config = {
-      headers: {
-        "Authorization": VueCookies.get("access_token")
-      }
-    }
-    axios.get("/api/book", config).then(({data}) => {
-      this.bookList = data;
-    })
-        .catch(error => {
-          console.log(error);
-        });
   }
 }
 </script>

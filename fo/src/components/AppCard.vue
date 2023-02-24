@@ -1,48 +1,84 @@
 <template>
 
-  <div class="card shadow-sm">
-    <svg class="bd-placeholder-img card-img-top" width="50%" height="225" xmlns="http://www.w3.org/2000/svg" role="img"
-         aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>
-      Placeholder</title>
-      <rect width="100%" height="100%" fill="#55595c"/>
-      <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-    </svg>
-
-    <router-link :to="{
-      path: `/book/${book.bookIdx}`,
-    }">
-      <div class="card-body">
-        <div clsss="d-flex justify-content-between">
-          <div class="mb-3">
-            <h4 class="card-text">{{ book.bookTitle }}</h4>
-          </div>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group gap-3">
-            <span class="badge rounded-pill text-bg-light mr-3">
-              <span class="badge text-bg-secondary">{{ book.readCount }}</span>
-            </span>
-          </div>
-          <div class="btn-group gap-3">
-            <span class="badge text-bg-light">{{ book.publishedDateTime }}</span>
-            <span class="badge text-bg-light"><em class="bi bi-person-fill"></em>저자 : {{ book.author }}</span>
-            <span class="badge text-bg-light" v-if="book.borrowOrNot">대여가능</span>
-            <span class="badge text-bg-light" v-else>대여중</span>
-            <span class="badge text-bg-light" v-if="!book.borrowOrNot"><em class="bi bi-person-fill"></em>{{ book.memName }}</span>
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img v-if="book.imgUrl == null" src="https://picsum.photos/250/300/?random" class="img-fluid rounded-start" alt="...">
+        <img v-else :src="book.imgUrl" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md">
+        <div class="card-body">
+          <router-link :to="{path: `/book/${book.bookIdx}`,}" style="text-decoration: none;">
+            <h1 class="card-title">{{ book.bookTitle }}</h1>
+          </router-link>
+          <p class="card-text">{{ book.bookOutline }}</p>
+          <div class="d-flex justify-content-end align-items-center gap-3">
+            <div class="btn-group gap-3">
+            </div>
+            <div class="btn-group gap-3 fs-5">
+              <span class="badge rounded-pill text-bg-light mr-3">대여 횟수 :
+                <span class="badge text-bg-secondary">{{ book.bookReadCount }}</span>
+              </span>
+              <span class="badge text-bg-light">{{ book.publishedDateTime }}</span>
+              <span class="badge text-bg-light"><em class="bi bi-person-fill"></em>저자 : {{ book.author }}</span>
+              <span class="badge text-bg-light" v-if="book.borrowOrNot">대여가능</span>
+              <span class="badge text-bg-light" v-else>{{ book.memName }} 님이 대여중</span>
+            </div>
+            <button class="btn btn-primary" v-if="book.borrowOrNot" @click="borrowBook">대여하기</button>
           </div>
         </div>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
 <script>
+
+import axios from "axios";
+import VueCookies from "vue-cookies";
+import store from "@/script/store";
+import router from "@/script/router";
 
 export default {
   name: 'AppCard',
   props: {
     book: Object
   },
+  data() {
+    return {
+      borrowInfoDto: {
+        bookIdx: 0,
+        memIdx: 0,
+        memName: "",
+        bookTitle: "",
+      }
+    }
+  },
+  methods: {
+    makeBorrowInfo() {
+      this.borrowInfoDto.bookIdx = this.book.bookIdx;
+      this.borrowInfoDto.memIdx = store.state.user.id;
+      this.borrowInfoDto.memName = store.state.user.memName;
+      this.borrowInfoDto.bookTitle = this.book.bookTitle;
+    },
+    borrowBook() {
+      if(!confirm('대여하시겠습니까?')) {
+        return;
+      }
+      this.makeBorrowInfo();
+      axios.post(`/api/borrow`, this.borrowInfoDto, {
+        headers: {
+          "Authorization": VueCookies.get('access_token')
+        }
+      }).then(res => {
+        console.log(res);
+        alert('도서를 대여했습니다.');
+        router.push(`/:${store.state.user.memName}`);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  }
 }
 </script>
 

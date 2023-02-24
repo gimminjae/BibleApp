@@ -18,13 +18,13 @@ export default {
     AppHeader
   },
   methods: {
-    requireAuth(from, to, next) {
-      const token = store.state.user.role;
-      if (token) {
-        return next();
-      } // isLogin === true면 페이지 이동
-      next('/login') // isLogin === false면 다시 로그인 화면으로 이동
-    },
+    // requireAuth(from, to, next) {
+    //   const token = store.state.user.role;
+    //   if (token) {
+    //     return next();
+    //   } // isLogin === true면 페이지 이동
+    //   next('/login') // isLogin === false면 다시 로그인 화면으로 이동
+    // },
     check() {
       const jwt = VueCookies.get('access_token');
 
@@ -35,11 +35,10 @@ export default {
       }
       axios.get("/api/member/me", config)
           .then(res => {
-            console.log(res.data.member);
             const user = res.data.member;
 
             if(user == null) {
-              router.push({path: '/login'});
+              router.push({path: '/'});
             }
 
             if (user != null) {
@@ -47,7 +46,7 @@ export default {
             }
           })
           .catch(() => {
-            router.push({path: '/login'});
+            router.push({path: '/'});
               }
           );
     }

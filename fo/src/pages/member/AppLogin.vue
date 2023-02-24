@@ -19,6 +19,7 @@
 import axios from "axios";
 import VueCookies from "vue-cookies";
 import router from "@/script/router";
+import store from "@/script/store";
 
 export default {
   name: "AppLogin",
@@ -37,6 +38,7 @@ export default {
       }
       axios.post("/api/member/login", this.MemberDto)
           .then(({data}) => {
+            console.log(data);
             //토큰
             const jwt = data.accessToken;
             const memName = data.memName;
@@ -59,8 +61,26 @@ export default {
               sameSite: 'strict'
             });
 
-            //로그인 후 홈페이지로 이동
-            router.push({path: `/`});
+            axios.get("/api/member/me", { headers: { "Authorization": VueCookies.get('access_token') }})
+                .then(res => {
+                  console.log(res.data.member);
+                  const user = res.data.member;
+
+                  if(user == null) {
+                    router.push({path: '/'});
+                  }
+
+                  if (user != null) {
+                    store.commit('setUser', user);
+                  }
+
+                  //로그인 후 홈페이지로 이동
+                  router.push({path: `/home`});
+                })
+                .catch(() => {
+                      router.push({path: '/'});
+                    }
+                );
           })
           .catch((error) => {
             alert(error);

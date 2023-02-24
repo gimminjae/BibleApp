@@ -2,12 +2,12 @@
   <div class="container" style="width: 80%;">
     <div class="d-flex justify-content-between my-3">
       <h1>{{ book.bookTitle }}</h1>
-      <div class="d-flex gap-3">
-        <router-link :to="{path: `/modify/${this.bookIdx}`}" class="">수정</router-link>
+      <div class="d-flex gap-3" v-if="$store.state.user.role === 'ADMIN'">
+        <router-link :to="{path: `/modify/${bookIdx}`}" class="" style="text-decoration: none;">수정</router-link>
       </div>
     </div>
     <div>
-      <p>{{ book}}</p>
+      <p>{{ book }}</p>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       book: {},
-      bookId: 0
+      bookIdx: 0
     }
   },
   mounted() {

@@ -7,7 +7,7 @@ const store = createStore({
             user: {
                 id: 0,
                 memName: "",
-                role: "",
+                role: "UNKNOWN",
                 //회원 정보는 필요한 최소한의 정보만 가지고 있는 것이 좋다
             }
         }
@@ -15,17 +15,15 @@ const store = createStore({
     ,
     mutations: {
         setUser(state, payload) {
-            console.log(payload);
             state.user.id = payload.memIdx;
             state.user.memName = payload.memName;
             state.user.role = payload.role;
-            console.log(state.user);
         }
         ,
         removeUser(state) {
             state.user.id = 0;
             state.user.memName = "";
-            state.user.role = "";
+            state.user.role = "UNKNOWN";
         }
     }
 })

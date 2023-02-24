@@ -18,7 +18,7 @@
       <tbody>
       <tr v-for="book in bookList" :key="book">
         <td>{{ book.bookIdx }}</td>
-        <td>{{ book.bookTitle }}</td>
+        <td><router-link :to="{path: `/book/${book.bookIdx}`}">{{ book.bookTitle }}</router-link></td>
         <td>{{ book.author }}</td>
         <td>{{ book.publisher }}</td>
         <td>{{ book.publishedDate }}</td>
