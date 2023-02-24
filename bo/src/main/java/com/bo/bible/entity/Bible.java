@@ -1,11 +1,13 @@
 package com.bo.bible.entity;
 
+import com.bo.bible.dto.BibleDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -37,6 +39,17 @@ public class Bible {
                 .sequence(bibleEnum.getSequence())
                 .readString(sb.toString())
                 .memIdx(memIdx)
+                .build();
+    }
+    public BibleDto toDto() {
+        List<Integer> readList = Arrays.stream(this.getReadString().split(" ")).map(Integer::valueOf).toList();
+
+        return BibleDto.builder()
+                .bibleIdx(this.getBibleIdx())
+                .bibleName(this.getBibleName())
+                .totalCount(this.getTotalCount())
+                .readList(readList)
+                .sequence(this.getSequence())
                 .build();
     }
 }

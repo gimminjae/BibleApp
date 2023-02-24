@@ -1,11 +1,20 @@
 <template>
-  <div class="card">
+  <div class="card mt-3">
     <div class="card-header">
       {{ bible.bibleName }}
     </div>
     <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        {{ bible.readString }}
+      <blockquote class="blockquote mb-0 d-flex flex-wrap gap-2 justify-content-start">
+        <div v-for="(bibleCount, index) in readList" :key="bibleCount">
+          <button type="button" :class="readCount(bibleCount)"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+            {{ index + 1 }}
+            <span v-if="bibleCount != 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+              {{ bibleCount }}
+    <span class="visually-hidden">unread messages</span>
+  </span>
+          </button>
+        </div>
       </blockquote>
     </div>
   </div>
@@ -21,9 +30,17 @@ export default {
   },
   data() {
     return {
+      readList: this.bible.readList
     }
   },
   methods: {
+    readCount(count) {
+      if(count == 0) {
+        return "btn btn-outline-info position-relative";
+      } else {
+        return "btn btn-info position-relative";
+      }
+    }
   }
 }
 </script>

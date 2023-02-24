@@ -1,5 +1,6 @@
 package com.bo.bible.controller;
 
+import com.bo.bible.dto.BibleDto;
 import com.bo.bible.entity.Bible;
 import com.bo.bible.service.BibleService;
 import com.bo.member.entity.MemberContext;
@@ -20,7 +21,7 @@ public class BibleController {
     private final BibleService bibleService;
 
     @GetMapping("")
-    public ResponseEntity<List<Bible>> getBibleListByMember(@AuthenticationPrincipal MemberContext memberContext) {
+    public ResponseEntity<List<BibleDto>> getBibleListByMember(@AuthenticationPrincipal MemberContext memberContext) {
         return new ResponseEntity<>(bibleService.getBibleListByMember(memberContext.getMemberIdx()), HttpStatus.OK);
     }
 }

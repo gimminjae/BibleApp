@@ -1,5 +1,6 @@
 package com.bo.bible.service;
 
+import com.bo.bible.dto.BibleDto;
 import com.bo.bible.entity.Bible;
 import com.bo.bible.entity.BibleEnum;
 import com.bo.bible.repository.BibleRepository;
@@ -23,7 +24,7 @@ public class BibleService {
         bibleRepository.save(newBible(BibleEnum.E, memberIdx));
     }
 
-    public List<Bible> getBibleListByMember(Long memberIdx) {
-        return bibleRepository.findByMemIdxOrderBySequence(memberIdx);
+    public List<BibleDto> getBibleListByMember(Long memberIdx) {
+        return bibleRepository.findByMemIdxOrderBySequence(memberIdx).stream().map(Bible::toDto).toList();
     }
 }

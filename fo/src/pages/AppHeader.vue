@@ -1,12 +1,13 @@
 <template>
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
+  <footer class="navbar fixed-bottom bg-body-tertiary d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 border-bottom">
     <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
       <img src="public/images/logo.png" alt="">
     </a>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-if="$store.state.user.id != 0"> <!-- v-if="$store.state.user.id != 0" -->
-      <li><router-link to="/home" href="#" class="nav-link px-2 link-dark">구약</router-link></li>
-      <li><router-link to="/home" href="#" class="nav-link px-2 link-dark">신약</router-link></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-between mb-md-0" v-if="$store.state.user.id != 0"> <!-- v-if="$store.state.user.id != 0" -->
+      <li class="d-flex">
+        <router-link to="/home" href="#" class="nav-link px-2 link-dark">구약</router-link>
+        <router-link to="/home" href="#" class="nav-link px-2 link-dark">신약</router-link></li>
 <!--      <li><router-link to="/requestBook" href="#" class="nav-link px-2 link-dark">Request Book</router-link></li>-->
       <li v-if="$store.state.user.memName === 'ADMIN'">
         <div class="btn-group">
@@ -21,12 +22,11 @@
           </ul>
         </div>
       </li>
+      <li><a @click="logout" class="btn btn-outline-primary me-2" style="float: right;" href="#" v-if="$store.state.user.id != 0">Logout</a></li>
     </ul>
-
-    <div class="col-md-3 text-end mr-3">
-      <a @click="logout" class="btn btn-outline-primary me-2" href="#" v-if="$store.state.user.id != 0">Logout</a>
-    </div>
-  </header>
+<!--    <div class="col-md-3 text-end mr-3">-->
+<!--    </div>-->
+  </footer>
 </template>
 <script>
 import store from "@/script/store";
@@ -51,5 +51,13 @@ export default {
 }
 </script>
 <style>
-
+/*header {*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  !* width: 100% *!*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  display: flex;*/
+/*  !* 생략 *!*/
+/*}*/
 </style>
