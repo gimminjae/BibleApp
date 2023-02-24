@@ -1,7 +1,8 @@
 <template>
   <div class="card mt-3">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
       {{ bible.bibleName }}
+      <button class="btn btn-outline-secondary btn-sm">저장</button>
     </div>
     <div class="card-body">
       <blockquote class="blockquote mb-0 d-flex flex-wrap gap-2 justify-content-start">
