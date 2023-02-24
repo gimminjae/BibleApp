@@ -35,6 +35,7 @@ export default {
       }
       axios.get("/api/member/me", config)
           .then(res => {
+            console.log(res);
             const user = res.data.member;
 
             if(user == null) {

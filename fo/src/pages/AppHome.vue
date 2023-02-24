@@ -1,26 +1,8 @@
 <template>
-  <div>
-    <div class="d-flex justify-content-center mt-5">
-      <div class="d-flex" style="width: 50%;">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="keyword"
-               @keyup.enter="submit_form()">
-        <button class="btn btn-outline-success" type="button" @click="submit_form()">Search</button>
-      </div>
+  <div class="container">
+    <div v-for="bible in bibleList" :key="bible">
+      <AppCard :bible="bible" class="mb-2"></AppCard>
     </div>
-    <div class="album py-5 bg-light">
-      <div class="container">
-
-<!--        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">-->
-
-        <div>
-          <div class="col" v-for="book in bookList" :key="book">
-            <AppCard :book="book"></AppCard>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
   </div>
 </template>
 <script>
@@ -33,28 +15,19 @@ export default {
   components: {AppCard},
   data() {
     return {
-      keyword: "",
-      bookList: []
+      bibleList: []
     }
   },
-  methods: {
-    submit_form() {
-      axios.get("/api/book?keyword=" + this.keyword).then(({data}) => {
-        this.bookList = data;
-      })
-          .catch(error => {
-            console.log(error);
-          })
-    }
-  },
+  methods: {},
   mounted() {
     let config = {
       headers: {
         "Authorization": VueCookies.get("access_token")
       }
     }
-    axios.get("/api/book", config).then(({data}) => {
-      this.bookList = data;
+    axios.get("/api/bible", config).then(({data}) => {
+      console.log(data);
+      this.bibleList = data;
     })
         .catch(error => {
           console.log(error);

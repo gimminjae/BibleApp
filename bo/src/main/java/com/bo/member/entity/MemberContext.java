@@ -17,7 +17,7 @@ public class MemberContext extends User {
     private final Long memberIdx;
     private final String username;
     private final String name;
-//    private final String role;
+    private final String role;
     private Map<String, Object> attributes;
 
     private String userNameAttributeName;
@@ -27,6 +27,7 @@ public class MemberContext extends User {
         this.memberIdx = member.getMemberIdx();
         this.name = member.getName();
         this.username = member.getUsername();
+        this.role = member.getRole();
     }
     public MemberContext(Member member, List<GrantedAuthority> authorities, Map<String, Object> attributes, String userNameAttributeName) {
         this(member, authorities);
@@ -43,5 +44,6 @@ public class MemberContext extends User {
         memberIdx = member.getMemberIdx();
         name = member.getName();
         username = member.getUsername();
+        role = member.getRole();
     }
 }

@@ -4,9 +4,9 @@
       <img src="public/images/logo.png" alt="">
     </a>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"> <!-- v-if="$store.state.user.id != 0" -->
-      <li><router-link to="/home" href="#" class="nav-link px-2 link-dark">Book</router-link></li>
-      <li><router-link :to="{path: `/${$store.state.user.memName}`}" href="#" class="nav-link px-2 link-dark">MyPage</router-link></li>
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" v-if="$store.state.user.id != 0"> <!-- v-if="$store.state.user.id != 0" -->
+      <li><router-link to="/home" href="#" class="nav-link px-2 link-dark">구약</router-link></li>
+      <li><router-link to="/home" href="#" class="nav-link px-2 link-dark">신약</router-link></li>
 <!--      <li><router-link to="/requestBook" href="#" class="nav-link px-2 link-dark">Request Book</router-link></li>-->
       <li v-if="$store.state.user.memName === 'ADMIN'">
         <div class="btn-group">
@@ -25,7 +25,6 @@
 
     <div class="col-md-3 text-end mr-3">
       <a @click="logout" class="btn btn-outline-primary me-2" href="#" v-if="$store.state.user.id != 0">Logout</a>
-      <router-link to="/" class="btn btn-primary me-2" v-else>Login</router-link>
     </div>
   </header>
 </template>

@@ -1,9 +1,12 @@
 package com.bo.bible.service;
 
+import com.bo.bible.entity.Bible;
 import com.bo.bible.entity.BibleEnum;
 import com.bo.bible.repository.BibleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.bo.bible.entity.Bible.newBible;
 
@@ -18,5 +21,9 @@ public class BibleService {
         bibleRepository.save(newBible(BibleEnum.C, memberIdx));
         bibleRepository.save(newBible(BibleEnum.D, memberIdx));
         bibleRepository.save(newBible(BibleEnum.E, memberIdx));
+    }
+
+    public List<Bible> getBibleListByMember(Long memberIdx) {
+        return bibleRepository.findByMemIdxOrderBySequence(memberIdx);
     }
 }
