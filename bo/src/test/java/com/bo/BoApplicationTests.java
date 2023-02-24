@@ -8,6 +8,7 @@ class BoApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println((int)'A');
     }
 
 }

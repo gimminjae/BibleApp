@@ -8,16 +8,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
-@Transactional
-@Rollback
+import java.util.Arrays;
+import java.util.List;
+
+//@SpringBootTest
+//@Transactional
+//@Rollback
 public class MemberServiceTests {
-    @Autowired
-    private MemberService memberService;
+//    @Autowired
+//    private MemberService memberService;
 
     @Test
     @DisplayName("회원 생성")
     void t1() {
-
+        String s = "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ";
+        String[] arr = s.split(" ");
+        List<String> list = Arrays.stream(arr).toList();
+        System.out.println(arr);
+        System.out.println(arr.toString());
+        System.out.println(list);
+        System.out.println(list.toString());
     }
 }

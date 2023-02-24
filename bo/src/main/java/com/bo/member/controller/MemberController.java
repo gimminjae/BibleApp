@@ -1,5 +1,6 @@
 package com.bo.member.controller;
 
+import com.bo.bible.service.BibleService;
 import com.bo.member.dto.JoinDto;
 import com.bo.member.dto.MemberDto;
 import com.bo.member.entity.MemberContext;
@@ -19,11 +20,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+    private final BibleService bibleService;
 
     @PostMapping("")
     public ResponseEntity<Void> createMember(@RequestBody JoinDto joinDto) {
-        memberService.create(joinDto);
+        MemberDto memberDto = memberService.create(joinDto);
 
+        bibleService.addBiblesAtMember(memberDto.getMemberIdx());
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/login")

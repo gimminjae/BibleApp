@@ -22,19 +22,19 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
 
-    public void create(JoinDto joinDto) {
+    public MemberDto create(JoinDto joinDto) {
         if(!joinDto.getPassword1().equals(joinDto.getPassword2())) {
             throw new InvalidParameterException("두 개의 비밀번호가 일치하지 않습니다");
         }
+        Member member = Member.from(joinDto);
         try {
-            Member member = Member.from(joinDto);
             member.setPassword(passwordEncoder.encode(joinDto.getPassword1()));
             memberRepository.save(member);
         } catch(DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("중복되는 회원이 존재합니다.");
         } catch (Exception e) {
-            return;
         }
+        return member.toDto();
     }
     public MemberDto login(String username, String password) {
         MemberDto member = getByUsername(username);
