@@ -4,6 +4,7 @@
       <AppCard :bible="bible" class="mb-2"></AppCard>
     </div>
   </div>
+  <div style="margin-bottom: 25%;"></div>
 </template>
 <script>
 import axios from "axios";
