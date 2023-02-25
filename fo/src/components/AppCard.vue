@@ -2,7 +2,7 @@
   <div class="card mt-3">
     <div class="card-header d-flex justify-content-between">
       {{ bible.bibleName }}
-      <button class="btn btn-outline-secondary btn-sm">저장</button>
+      <button class="btn btn-outline-secondary btn-sm" @click="save">저장</button>
     </div>
     <div class="card-body">
       <blockquote class="blockquote mb-0 d-flex flex-wrap gap-2 justify-content-start">
@@ -24,6 +24,9 @@
 <script>
 
 
+import axios from "axios";
+import VueCookies from "vue-cookies";
+
 export default {
   name: 'AppCard',
   props: {
@@ -35,6 +38,23 @@ export default {
     }
   },
   methods: {
+    save() {
+      if(!confirm('변경사항을 저장하시겠습니까?')) {
+        return;
+      }
+      axios.post(`/api/bible/save/${this.bible.bibleIdx}`, { "readList":this.readList.toString() }, {
+        headers : {
+          "Authorization": VueCookies.get('access_token')
+        }
+      }).then(res => {
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+      })
+      console.log('save bible');
+      console.log(this.bible);
+      console.log(this.readList.toString());
+    },
     bibleCountPlus(index, bibleCount) {
       this.readList[index]++;
       console.log(index, bibleCount);

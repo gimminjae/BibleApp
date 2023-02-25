@@ -31,7 +31,7 @@ public class Bible {
     public static Bible newBible(BibleEnum bibleEnum, long memIdx) {
         StringBuilder sb = new StringBuilder();
         for(int i = 1;i <= bibleEnum.getCount(); i++) {
-            sb.append("0 ");
+            sb.append("0,");
         }
         return Bible.builder()
                 .bibleName(bibleEnum.getName())
@@ -42,7 +42,7 @@ public class Bible {
                 .build();
     }
     public BibleDto toDto() {
-        List<Integer> readList = Arrays.stream(this.getReadString().split(" ")).map(Integer::valueOf).toList();
+        List<Integer> readList = Arrays.stream(this.getReadString().split(",")).map(Integer::valueOf).toList();
 
         return BibleDto.builder()
                 .bibleIdx(this.getBibleIdx())
@@ -51,5 +51,15 @@ public class Bible {
                 .readList(readList)
                 .sequence(this.getSequence())
                 .build();
+    }
+
+    public void update(String readList) {
+        String[] arr = readList.split(",");
+
+        long newReadcount = Arrays.stream(arr).filter(i -> !i.equals("0")).count();
+
+        this.readString = readList;
+        this.readCount = (int)newReadcount;
+        this.readPercent = (int)(this.totalCount / this.readCount);
     }
 }
