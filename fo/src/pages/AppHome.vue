@@ -27,7 +27,6 @@ export default {
       }
     }
     axios.get("/api/bible", config).then(({data}) => {
-      console.log(data);
       this.bibleList = data;
     })
         .catch(error => {

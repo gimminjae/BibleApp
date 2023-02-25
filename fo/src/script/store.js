@@ -15,8 +15,8 @@ const store = createStore({
     ,
     mutations: {
         setUser(state, payload) {
-            state.user.id = payload.memIdx;
-            state.user.memName = payload.memName;
+            state.user.id = payload.memberIdx;
+            state.user.memName = payload.name;
             state.user.role = payload.role;
         }
         ,

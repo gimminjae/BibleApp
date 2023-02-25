@@ -4,12 +4,12 @@
       <img src="public/images/logo.png" alt="">
     </a>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-between mb-md-0" v-if="$store.state.user.id != 0"> <!-- v-if="$store.state.user.id != 0" -->
-      <li class="d-flex">
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-between mb-md-0"> <!-- v-if="$store.state.user.id != 0" -->
+      <li class="d-flex" v-if="$store.state.user.role !== 'UNKNOWN'">
         <router-link to="/home" href="#" class="nav-link px-2 link-dark">구약</router-link>
         <router-link to="/home" href="#" class="nav-link px-2 link-dark">신약</router-link></li>
 <!--      <li><router-link to="/requestBook" href="#" class="nav-link px-2 link-dark">Request Book</router-link></li>-->
-      <li v-if="$store.state.user.memName === 'ADMIN'">
+      <li v-if="$store.state.user.role === 'ADMIN'">
         <div class="btn-group">
           <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             ADMIN
@@ -22,7 +22,7 @@
           </ul>
         </div>
       </li>
-      <li><a @click="logout" class="btn btn-outline-primary me-2" style="float: right;" href="#" v-if="$store.state.user.id != 0">Logout</a></li>
+      <li><a @click="logout" class="btn btn-outline-primary me-2" style="float: right;" href="#" v-if="$store.state.user.role !== 'UNKNOWN'">Logout</a></li>
     </ul>
 <!--    <div class="col-md-3 text-end mr-3">-->
 <!--    </div>-->
@@ -38,6 +38,15 @@ export default {
   components: {
   },
   methods: {
+    // confirmLogin() {
+    //   console.log(store.state.user);
+    //   if(store.state.user.id !== 0) {
+    //     console.log('login');
+    //     return false;
+    //   }
+    //   console.log('no login');
+    //   return true;
+    // },
     logout() {
       if(!confirm('로그아웃 하시겠습니까?')) {
         return;

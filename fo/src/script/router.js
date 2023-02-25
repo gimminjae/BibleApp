@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import AppLogin from "@/pages/member/AppLogin.vue";
 import AppHome from "@/pages/AppHome";
-import AppJoin from "@/pages/admin/AppJoin.vue";
+import AppJoin from "@/pages/member/AppJoin.vue";
 import store from "@/script/store";
 
 
@@ -21,7 +21,7 @@ const routes = [
     {
         path: '/join', component: AppJoin,
         meta: {
-            roles: ['MEMBER', 'ADMIN']
+            roles: ['UNKNOWN']
         }
     },
 ]
@@ -36,7 +36,9 @@ router.beforeEach((to, from, next) => {
         // if(roleStatus === "UNKNOWN") {
         //     next({path:'login'});
         // }
-        console.log(roleStatus);
+        if (roleStatus == null) {
+            roleStatus = 'UNKNOWN';
+        }
         if (!to.meta.roles.includes(roleStatus)) {
             alert('해당 페이지에 접근 권한이 없습니다.')
             next(from)

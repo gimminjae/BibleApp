@@ -26,6 +26,9 @@ export default {
   name: "AppLogin",
   components: {},
   methods: {
+    join() {
+      router.push('/join');
+    },
     login() {
       if (this.MemberDto.username.trim().length == 0) {
         alert('아이디를 입력하세요');
@@ -39,7 +42,6 @@ export default {
       }
       axios.post("/api/member/login", this.MemberDto)
           .then(({data}) => {
-            console.log(data);
             //토큰
             const jwt = data.accessToken;
             const memName = data.memName;
@@ -64,7 +66,6 @@ export default {
 
             axios.get("/api/member/me", { headers: { "Authorization": VueCookies.get('access_token') }})
                 .then(res => {
-                  console.log(res.data.member);
                   const user = res.data.member;
 
                   if(user == null) {
