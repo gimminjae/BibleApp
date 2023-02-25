@@ -26,7 +26,7 @@ export default {
         "Authorization": VueCookies.get("access_token")
       }
     }
-    axios.get("/api/bible", config).then(({data}) => {
+    axios.get(`/api/bible/old`, config).then(({data}) => {
       this.bibleList = data;
     })
         .catch(error => {

@@ -26,8 +26,8 @@ public class BibleService {
         bibleRepository.save(newBible(BibleEnum.E, memberIdx));
     }
 
-    public List<BibleDto> getBibleListByMember(Long memberIdx) {
-        return bibleRepository.findByMemIdxOrderBySequence(memberIdx).stream().map(Bible::toDto).toList();
+    public List<BibleDto> getBibleListByMember(Long memberIdx, String version) {
+        return bibleRepository.findByMemIdxAndVersionOrderBySequence(memberIdx, version).stream().map(Bible::toDto).toList();
     }
 
     public void save(Long bibleIdx, String readList) {

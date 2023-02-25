@@ -15,4 +15,5 @@ public class BibleDto {
     private String bibleName;
     private List<Integer> readList;
     private Integer totalCount;
+    private String version;
 }

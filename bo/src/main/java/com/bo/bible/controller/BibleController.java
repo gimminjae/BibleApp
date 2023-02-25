@@ -20,9 +20,9 @@ import java.util.Map;
 public class BibleController {
     private final BibleService bibleService;
 
-    @GetMapping("")
-    public ResponseEntity<List<BibleDto>> getBibleListByMember(@AuthenticationPrincipal MemberContext memberContext) {
-        return new ResponseEntity<>(bibleService.getBibleListByMember(memberContext.getMemberIdx()), HttpStatus.OK);
+    @GetMapping("/{version}")
+    public ResponseEntity<List<BibleDto>> getBibleListByMember(@AuthenticationPrincipal MemberContext memberContext, @PathVariable String version) {
+        return new ResponseEntity<>(bibleService.getBibleListByMember(memberContext.getMemberIdx(), version), HttpStatus.OK);
     }
     @PostMapping("/save/{bibleIdx}")
     public ResponseEntity<Object> saveReadBible(@AuthenticationPrincipal MemberContext memberContext,

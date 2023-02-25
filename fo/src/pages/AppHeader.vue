@@ -6,8 +6,8 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-between mb-md-0"> <!-- v-if="$store.state.user.id != 0" -->
       <li class="d-flex" v-if="$store.state.user.id">
-        <router-link to="/home" href="#" class="nav-link px-2 link-dark">구약</router-link>
-        <router-link to="/home" href="#" class="nav-link px-2 link-dark">신약</router-link></li>
+        <button class="nav-link px-2 link-dark">구약</button>
+        <button class="nav-link px-2 link-dark">신약</button></li>
 <!--      <li><router-link to="/requestBook" href="#" class="nav-link px-2 link-dark">Request Book</router-link></li>-->
       <li v-if="$store.state.user.role === 'ADMIN'">
         <div class="btn-group">

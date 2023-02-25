@@ -1,4 +1,9 @@
 <template>
+  <div class="text-center">
+    <h1>하나님께서</h1>
+    <h1>함께 하시는</h1>
+    <h1>구리교회 청년회</h1>
+  </div>
   <div class="mx-auto my-auto" style="width: 80%;">
     <div class="mb-3 mt-3">
       <h3>ID</h3>

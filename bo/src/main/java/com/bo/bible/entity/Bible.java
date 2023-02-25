@@ -26,6 +26,7 @@ public class Bible {
     private Integer readCount;
     private Integer readPercent;
     private Long memIdx;
+    private String version;
 //    @OneToMany
 //    private List<BiblePage> biblePageList;
     public static Bible newBible(BibleEnum bibleEnum, long memIdx) {
@@ -39,6 +40,7 @@ public class Bible {
                 .sequence(bibleEnum.getSequence())
                 .readString(sb.toString())
                 .memIdx(memIdx)
+                .version(bibleEnum.getVersion())
                 .build();
     }
     public BibleDto toDto() {
@@ -50,6 +52,7 @@ public class Bible {
                 .totalCount(this.getTotalCount())
                 .readList(readList)
                 .sequence(this.getSequence())
+                .version(this.getVersion())
                 .build();
     }
 
