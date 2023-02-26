@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="margin-top: 20%;">
     <div v-for="bible in bibleList" :key="bible">
       <AppCard :bible="bible" class="mb-2"></AppCard>
     </div>

@@ -1,12 +1,12 @@
 <template>
-  <RouterView></RouterView>
   <AppHeader></AppHeader>
+  <RouterView></RouterView>
 </template>
 
 <script>
 import {useRoute} from "vue-router";
 import {watch} from "vue";
-import AppHeader from "@/pages/AppHeader";
+import AppHeader from "@/pages/AppHeader.vue";
 import VueCookies from "vue-cookies";
 import store from "@/script/store";
 import router from "@/script/router";
