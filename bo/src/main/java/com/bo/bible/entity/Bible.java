@@ -63,6 +63,6 @@ public class Bible {
 
         this.readString = readList;
         this.readCount = (int)newReadcount;
-        this.readPercent = (int)(this.totalCount / this.readCount);
+        this.readPercent = (int)(((float)this.readCount / (float)this.totalCount) * 100);
     }
 }

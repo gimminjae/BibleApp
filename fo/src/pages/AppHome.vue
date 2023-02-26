@@ -19,19 +19,23 @@ export default {
       bibleList: []
     }
   },
-  methods: {},
-  mounted() {
-    let config = {
-      headers: {
-        "Authorization": VueCookies.get("access_token")
-      }
+  methods: {
+    getBible() {
+      axios.get(`/api/bible/old`, {
+        headers: {
+          "Authorization": VueCookies.get('access_token')
+        }
+      })
+          .then(({data}) => {
+            this.bibleList = data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
     }
-    axios.get(`/api/bible/old`, config).then(({data}) => {
-      this.bibleList = data;
-    })
-        .catch(error => {
-          console.log(error);
-        });
+  },
+  mounted() {
+    this.getBible();
   }
 }
 </script>
