@@ -3,6 +3,7 @@ import AppLogin from "@/pages/member/AppLogin.vue";
 import AppHome from "@/pages/AppHome";
 import AppJoin from "@/pages/member/AppJoin.vue";
 import store from "@/script/store";
+import AppBibleChartDetail from "@/pages/AppBibleChartDetail.vue";
 
 
 const routes = [
@@ -23,7 +24,13 @@ const routes = [
         meta: {
             roles: ['UNKNOWN']
         }
+    },{
+        path: '/bibleChart/:bibleChartIdx', component: AppBibleChartDetail,
+        meta: {
+            roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
     },
+
 ]
 const router = createRouter({
     history: createWebHistory(),

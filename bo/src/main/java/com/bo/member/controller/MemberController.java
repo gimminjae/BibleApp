@@ -27,7 +27,7 @@ public class MemberController {
     public ResponseEntity<Void> createMember(@RequestBody JoinDto joinDto) {
         MemberDto memberDto = memberService.create(joinDto);
 
-        bibleService.addBiblesAtMember(memberDto.getMemberIdx());
+//        bibleService.addBiblesAtMember(memberDto.getMemberIdx());
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PostMapping("/login")

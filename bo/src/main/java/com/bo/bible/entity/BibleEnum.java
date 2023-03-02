@@ -4,11 +4,12 @@ import lombok.Getter;
 
 @Getter
 public enum BibleEnum {
-    A("창세기", 50, 1, "old"),
-    B("출애굽기", 40, 2, "old"),
-    C("레위기", 27,3, "old"),
-    D("민수기", 36, 4, "old"),
-    E("신명기", 34, 5, "old");
+    Old1("창세기", 50, 1, "old"),
+    Old2("출애굽기", 40, 2, "old"),
+    Old3("레위기", 27,3, "old"),
+    Old4("민수기", 36, 4, "old"),
+    Old5("신명기", 34, 5, "old"),
+    New1("마태복음", 28, 1, "new");
     private String name;
     private Integer count;
     private Integer sequence;

@@ -23,7 +23,7 @@ public class MemberDto {
                 .memberIdx(this.getMemberIdx())
                 .username(this.getUsername())
                 .password(this.getPassword())
-                .deptId(this.getDeptId())
+                .deptIdx(this.getDeptId())
                 .name(this.getName())
                 .gender(this.getGender())
                 .role(this.getRole())

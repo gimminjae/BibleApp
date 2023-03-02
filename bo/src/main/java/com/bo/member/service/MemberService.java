@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,5 +57,13 @@ public class MemberService {
 
     public String genAccessToken(Member member) {
         return jwtProvider.generateAccessToken(member.getAccessTokenClaims(), 60 * 60 * 24 * 90);
+    }
+
+    public List<MemberDto> getByDeptIdx(Long deptIdx) {
+        return memberRepository.findByDeptIdx(deptIdx).stream().map(Member::toDto).toList();
+    }
+
+    public List<MemberDto> getAll() {
+        return memberRepository.findAll().stream().map(Member::toDto).toList();
     }
 }

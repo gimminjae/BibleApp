@@ -24,7 +24,7 @@ public class Member {
     @Column(unique = true)
     private String username;
     private String password;
-    private Long deptId;
+    private Long deptIdx;
     private String name;
     private String gender;
     private String role;
@@ -34,7 +34,7 @@ public class Member {
                 .memberIdx(this.getMemberIdx())
                 .username(this.getUsername())
                 .password(this.getPassword())
-                .deptId(this.getDeptId())
+                .deptId(this.getDeptIdx())
                 .name(this.getName())
                 .gender(this.getGender())
                 .role(this.getRole())
@@ -43,7 +43,7 @@ public class Member {
     public static Member from(JoinDto joinDto) {
         return Member.builder()
                 .username(joinDto.getUsername())
-                .deptId(null)
+                .deptIdx(null)
                 .name(joinDto.getName())
                 .gender(joinDto.getGender())
                 .role(joinDto.getUsername().equals("ADMIN") ? "ADMIN" : "MEMBER")

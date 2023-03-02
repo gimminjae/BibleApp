@@ -16,4 +16,5 @@ public class BibleDto {
     private List<Integer> readList;
     private Integer totalCount;
     private String version;
+    private Long bibleChartIdx;
 }

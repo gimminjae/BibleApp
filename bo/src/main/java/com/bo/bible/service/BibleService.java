@@ -18,12 +18,13 @@ import static com.bo.bible.entity.Bible.newBible;
 public class BibleService {
     private final BibleRepository bibleRepository;
 
-    public void addBiblesAtMember(Long memberIdx) {
-        bibleRepository.save(newBible(BibleEnum.A, memberIdx));
-        bibleRepository.save(newBible(BibleEnum.B, memberIdx));
-        bibleRepository.save(newBible(BibleEnum.C, memberIdx));
-        bibleRepository.save(newBible(BibleEnum.D, memberIdx));
-        bibleRepository.save(newBible(BibleEnum.E, memberIdx));
+    public void addBiblesAtMember(Long memberIdx, Long bibleChartIdx) {
+        bibleRepository.save(newBible(BibleEnum.Old1, memberIdx, bibleChartIdx));
+        bibleRepository.save(newBible(BibleEnum.Old2, memberIdx, bibleChartIdx));
+        bibleRepository.save(newBible(BibleEnum.Old3, memberIdx, bibleChartIdx));
+        bibleRepository.save(newBible(BibleEnum.Old4, memberIdx, bibleChartIdx));
+        bibleRepository.save(newBible(BibleEnum.Old5, memberIdx, bibleChartIdx));
+        bibleRepository.save(newBible(BibleEnum.New1, memberIdx, bibleChartIdx));
     }
 
     public List<BibleDto> getBibleListByMember(Long memberIdx, String version) {
