@@ -1,16 +1,22 @@
 <template>
   <div class="card mt-3">
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between" @click="showBool = !showBool">
       {{ bible.bibleName }}
-      <button class="btn btn-outline-secondary btn-sm" @click="save">저장</button>
+      <span class="badge text-bg-success" v-if="!showBool && bible.readPercent > 0"> {{ bible.readPercent }} %</span>
+      <div class="d-flex gap-1" v-if="showBool">
+        <button class="btn btn-outline-secondary btn-sm" @click="save">저장</button>
+        <button class="btn btn-outline-secondary btn-sm" @click="back">되돌리기</button>
+      </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" v-if="showBool">
       <blockquote class="blockquote mb-0 d-flex flex-wrap gap-2 justify-content-start">
         <div v-for="(bibleCount, index) in readList" :key="bibleCount">
           <button type="button" :class="readCount(bibleCount)"
-                  style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .15rem; --bs-btn-font-size: .100rem;" @click="bibleCountPlusOrMinus(index, bibleCount)">
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .100rem;"
+                  @click="bibleCountPlusOrMinus(index, bibleCount)">
             {{ index + 1 }}
-            <span v-if="bibleCount != 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+            <span v-if="bibleCount != 0"
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
               {{ bibleCount }}
     <span class="visually-hidden">unread messages</span>
   </span>
@@ -34,16 +40,26 @@ export default {
   },
   data() {
     return {
+      showBool: false,
       readList: this.bible.readList
     }
   },
   methods: {
+    modalId() {
+      return "staticBackdrop" + this.bible.bibleIdx;
+    },
+    shopModalId() {
+      return "#" + this.modalId();
+    },
+    back(e) {
+      this.$emit('AppCardChild', e.target.value)
+    },
     save() {
-      if(!confirm('변경사항을 저장하시겠습니까?')) {
+      if (!confirm('변경사항을 저장하시겠습니까?')) {
         return;
       }
-      axios.post(`/api/bible/save/${this.bible.bibleIdx}`, { "readList":this.readList.toString() }, {
-        headers : {
+      axios.post(`/api/bible/save/${this.bible.bibleIdx}`, {"readList": this.readList.toString()}, {
+        headers: {
           "Authorization": VueCookies.get('access_token')
         }
       }).then(res => {
@@ -51,16 +67,13 @@ export default {
       }).catch(error => {
         console.log(error);
       })
-      console.log('save bible');
-      console.log(this.bible);
-      console.log(this.readList.toString());
     },
     bibleCountPlusOrMinus(index, bibleCount) {
       this.readList[index]++;
       console.log(index, bibleCount);
     },
     readCount(count) {
-      if(count == 0) {
+      if (count == 0) {
         return "btn btn-outline-info position-relative";
       } else {
         return "btn btn-info position-relative";
@@ -72,5 +85,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+#staticBackdrop {
+  position: fixed;
+}
 </style>

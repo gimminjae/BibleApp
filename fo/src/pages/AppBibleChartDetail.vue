@@ -9,7 +9,7 @@
       </li>
     </ul>
     <div v-for="bible in bibleList" :key="bible">
-      <AppCard :bible="bible" class="mb-2"></AppCard>
+      <AppCard :bible="bible" @AppCardChild="getBible" @refreshBible="getBible" class="mb-2"></AppCard>
     </div>
   </div>
   <div style="margin-bottom: 25%;"></div>
@@ -28,6 +28,7 @@ export default {
       bibleChartIdx: null,
       version: "old",
       isOld: true,
+      bible: null
     }
   },
   methods: {

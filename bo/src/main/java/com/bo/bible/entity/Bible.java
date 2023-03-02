@@ -56,6 +56,8 @@ public class Bible {
                 .sequence(this.getSequence())
                 .version(this.getVersion())
                 .bibleChartIdx(this.getBibleChartIdx())
+                .memIdx(this.getMemIdx())
+                .readPercent(this.getReadPercent())
                 .build();
     }
 
