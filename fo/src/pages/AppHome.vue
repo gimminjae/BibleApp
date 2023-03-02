@@ -1,8 +1,10 @@
 <template>
   <div class="container" style="margin-top: 20%;">
     <div>
-      <button class="btn btn-primary" @click="createBibleChart">읽기표 만들기</button>
-      <input type="text" placeholder="읽기표 이름" id="bibleChartName" v-model="bibleChartName">
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-info" type="button" @click="createBibleChart" id="button-addon1">읽기표 만들기</button>
+        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" v-model="bibleChartName">
+      </div>
     </div>
     <div>
       <div v-for="bibleChart in bibleChartList" :key="bibleChart">

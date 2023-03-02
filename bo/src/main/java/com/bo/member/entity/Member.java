@@ -62,6 +62,8 @@ public class Member {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if(this.getRole().equals("ADMIN")) {
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
+        } else if(this.getRole().equals("SUBADMIN")) {
+            authorities.add(new SimpleGrantedAuthority("SUBADMIN"));
         } else {
             authorities.add(new SimpleGrantedAuthority("MEMBER"));
         }

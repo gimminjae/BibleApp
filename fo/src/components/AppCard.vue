@@ -8,7 +8,7 @@
       <blockquote class="blockquote mb-0 d-flex flex-wrap gap-2 justify-content-start">
         <div v-for="(bibleCount, index) in readList" :key="bibleCount">
           <button type="button" :class="readCount(bibleCount)"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" @click="bibleCountPlusOrMinus(index, bibleCount)">
+                  style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .15rem; --bs-btn-font-size: .100rem;" @click="bibleCountPlusOrMinus(index, bibleCount)">
             {{ index + 1 }}
             <span v-if="bibleCount != 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
               {{ bibleCount }}
