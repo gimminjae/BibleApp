@@ -1,6 +1,9 @@
 <template>
-  <AppHeader></AppHeader>
+  <div class="headerbar">
+    상단바
+  </div>
   <RouterView></RouterView>
+  <AppHeader></AppHeader>
 </template>
 
 <script>
@@ -58,6 +61,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.headerbar {
+  z-index: 10;
+  position: fixed;
+  background-color: skyblue;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4rem;
+}
 </style>

@@ -81,7 +81,7 @@ export default {
       console.log(this.MemberDto);
       axios.post(`/api/member`, this.MemberDto)
           .then(() => {
-            router.push({path: '/'});
+            router.replace({path: '/'});
           }).catch((error) => {
             alert('계정 생성 실패 : ', error);
       });
