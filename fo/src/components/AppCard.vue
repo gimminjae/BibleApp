@@ -45,26 +45,31 @@ export default {
     }
   },
   methods: {
-    modalId() {
-      return "staticBackdrop" + this.bible.bibleIdx;
-    },
-    shopModalId() {
-      return "#" + this.modalId();
-    },
     back(e) {
       this.$emit('AppCardChild', e.target.value)
+    },
+    setBible(newBible) {
+      this.$props.bible.readPercent = newBible.readPercent;
     },
     save() {
       if (!confirm('변경사항을 저장하시겠습니까?')) {
         return;
       }
-      axios.post(`/api/bible/save/${this.bible.bibleIdx}`, {"readList": this.readList.toString()}, {
+      let config = {
         headers: {
           "Authorization": VueCookies.get('access_token')
         }
-      }).then(res => {
-        console.log(res);
-      }).catch(error => {
+      };
+      axios.post(`/api/bible/save/${this.bible.bibleIdx}`, {"readList": this.readList.toString()}, config)
+          .then(res => {
+            console.log(res);
+            axios.get(`/api/bible/single/${this.bible.bibleIdx}`, config)
+                .then(({data}) => {
+                  console.log(data);
+                  this.setBible(data);
+                  this.readList = data.readList;
+                })
+          }).catch(error => {
         console.log(error);
       })
     },

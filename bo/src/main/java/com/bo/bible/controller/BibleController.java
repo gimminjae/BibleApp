@@ -6,6 +6,7 @@ import com.bo.bible.service.BibleService;
 import com.bo.member.entity.Member;
 import com.bo.member.entity.MemberContext;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,10 @@ public class BibleController {
     @GetMapping("/{version}")
     public ResponseEntity<List<BibleDto>> getBibleListByMember(@AuthenticationPrincipal MemberContext memberContext, @PathVariable String version) {
         return new ResponseEntity<>(bibleService.getBibleListByMember(memberContext.getMemberIdx(), version), HttpStatus.OK);
+    }
+    @GetMapping("/single/{bibleIdx}")
+    public ResponseEntity<BibleDto> getBible(@PathVariable Long bibleIdx) {
+        return new ResponseEntity<>(bibleService.getByBibleIdx(bibleIdx), HttpStatus.OK);
     }
     @PostMapping("/save/{bibleIdx}")
     public ResponseEntity<Object> saveReadBible(@AuthenticationPrincipal MemberContext memberContext,

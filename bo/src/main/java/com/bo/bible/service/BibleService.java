@@ -42,4 +42,8 @@ public class BibleService {
             throw new NullPointerException("데이터가 존재하지 않습니다.");
         }
     }
+
+    public BibleDto getByBibleIdx(Long bibleIdx) {
+        return bibleRepository.findById(bibleIdx).orElse(null).toDto();
+    }
 }
