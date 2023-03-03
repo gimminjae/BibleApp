@@ -27,8 +27,20 @@
     </div>
     <div class="mb-3">
       <h3>성별</h3>
-      <input class="form-control form-control-lg" type="text" placeholder="부서" id="gender"
-             aria-label=".form-control-lg example" v-model="this.MemberDto.gender" @keyup.enter="join">
+      <div class="d-flex gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" v-model="this.MemberDto.gender" value="M">
+          <label class="form-check-label" for="flexRadioDefault1">
+            형제
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  v-model="this.MemberDto.gender" value="W">
+          <label class="form-check-label" for="flexRadioDefault2">
+            자매
+          </label>
+        </div>
+      </div>
     </div>
     <div class="d-flex justify-content-around mb-3">
       <button style="width: 48%;" type="button" class="btn btn-info" @click="join">계정생성</button>

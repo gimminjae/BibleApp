@@ -15,7 +15,7 @@
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .100rem;"
                   @click="bibleCountPlusOrMinus(index)">
             {{ index + 1 }}
-            <span v-if="bibleCount != 0"
+            <span v-if="bibleCount !== 0"
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
               {{ bibleCount }}
     <span class="visually-hidden">unread messages</span>
@@ -61,13 +61,12 @@ export default {
         }
       };
       axios.post(`/api/bible/save/${this.bible.bibleIdx}`, {"readList": this.readList.toString()}, config)
-          .then(res => {
-            console.log(res);
+          .then(() => {
             axios.get(`/api/bible/single/${this.bible.bibleIdx}`, config)
                 .then(({data}) => {
-                  console.log(data);
                   this.setBible(data);
                   this.readList = data.readList;
+                  this.showBool = true;
                 })
           }).catch(error => {
         console.log(error);
@@ -77,7 +76,7 @@ export default {
       this.readList[index]++;
     },
     readCount(count) {
-      if (count == 0) {
+      if (count === 0) {
         return "btn btn-outline-info position-relative";
       } else {
         return "btn btn-info position-relative";

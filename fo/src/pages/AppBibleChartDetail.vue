@@ -1,11 +1,12 @@
 <template>
   <div class="container" style="margin-top: 20%;">
+    <div>목표 & 달성</div>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link" :class="{active: isOld}" @click="changeVersion" aria-current="page" href="#">구약</a>
+        <a class="nav-link" :class="{active: isOld}" @click="changeVersion('old')" aria-current="page" href="#">구약</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" :class="{active: !isOld}" @click="changeVersion" aria-current="page" href="#">신약</a>
+        <a class="nav-link" :class="{active: !isOld}" @click="changeVersion('new')" aria-current="page" href="#">신약</a>
       </li>
     </ul>
     <div v-for="bible in bibleList" :key="bible">
@@ -24,21 +25,26 @@ export default {
   components: {AppCard},
   data() {
     return {
+      bibleChart: null,
       bibleList: [],
       bibleChartIdx: null,
       version: "old",
       isOld: true,
+      isGoal: true,
       bible: null
     }
   },
   methods: {
-    changeVersion() {
-      this.isOld = !this.isOld;
-      if(this.version === "old") {
-        this.version = "new";
+    onGoal() {
+      this.isGoal = !this.isGoal;
+    },
+    changeVersion(version) {
+      if(version === "old") {
+        this.isOld = true;
       } else {
-        this.version = "old";
+        this.isOld = false;
       }
+      this.version = version;
       this.getBible();
     },
     getBible() {
