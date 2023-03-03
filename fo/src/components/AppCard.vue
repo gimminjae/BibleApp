@@ -13,7 +13,7 @@
         <div v-for="(bibleCount, index) in readList" :key="bibleCount">
           <button type="button" :class="readCount(bibleCount)"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .100rem;"
-                  @click="bibleCountPlusOrMinus(index, bibleCount)">
+                  @click="bibleCountPlusOrMinus(index)">
             {{ index + 1 }}
             <span v-if="bibleCount != 0"
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
@@ -68,9 +68,8 @@ export default {
         console.log(error);
       })
     },
-    bibleCountPlusOrMinus(index, bibleCount) {
+    bibleCountPlusOrMinus(index) {
       this.readList[index]++;
-      console.log(index, bibleCount);
     },
     readCount(count) {
       if (count == 0) {

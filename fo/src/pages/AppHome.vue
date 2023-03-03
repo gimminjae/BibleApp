@@ -3,13 +3,25 @@
     <div>
       <div class="input-group mb-3">
         <button class="btn btn-outline-info" type="button" @click="createBibleChart" id="button-addon1">읽기표 만들기</button>
-        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" v-model="bibleChartName">
+        <input type="text" class="form-control" placeholder="나만의 읽기표를 만들어 보세요!" aria-label="Example text with button addon" aria-describedby="button-addon1" v-model="bibleChartName">
       </div>
     </div>
     <div>
       <div v-for="bibleChart in bibleChartList" :key="bibleChart">
-        <router-link :to="{path: `/bibleChart/${bibleChart.bibleChartIdx}`}">
-          <h1>{{ bibleChart.chartName }}</h1>
+        <router-link :to="{path: `/bibleChart/${bibleChart.bibleChartIdx}`}" style="text-decoration: none; color: black;">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between">
+              <div>
+                {{ bibleChart.chartName }}
+              </div>
+              <span class="badge bg-info">
+                50%
+              </span>
+            </div>
+            <div class="card-body">
+              2020-10-10 ~ 2021-10-10 구약 1독 신약 2독!
+            </div>
+          </div>
         </router-link>
       </div>
     </div>

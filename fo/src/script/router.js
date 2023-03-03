@@ -16,15 +16,15 @@ const routes = [
     {
         path: '/', component: AppLogin,
         meta: {
-            roles: ['UNKNOWN']
+            roles: ['UNKNOWN', '']
         }
     },
     {
         path: '/join', component: AppJoin,
         meta: {
-            roles: ['UNKNOWN']
+            roles: ['UNKNOWN', '']
         }
-    },{
+    }, {
         path: '/bibleChart/:bibleChartIdx', component: AppBibleChartDetail,
         meta: {
             roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
@@ -40,8 +40,12 @@ const router = createRouter({
 //member권한의 회원이 관리자 페이지에 접근시, 로그인 상태인데도 로그인 페이지로 넘어감
 router.beforeEach((to, from, next) => {
         let roleStatus = store.state.user.role; // 권한 상태
-
+        if (roleStatus == null) {
+            roleStatus = '';
+        }
         if (!to.meta.roles.includes(roleStatus)) {
+            console.log(to.meta.roles);
+            console.log('권한 문제');
             next(from)
         } else {
             next()
