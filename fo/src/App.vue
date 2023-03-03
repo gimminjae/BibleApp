@@ -1,5 +1,5 @@
 <template>
-  <div class="headerbar" v-if="$store.state.user.id">
+  <div class="headerbar"> <!-- v-if="$store.state.user.id" -->
     상단바
   </div>
   <RouterView></RouterView>
