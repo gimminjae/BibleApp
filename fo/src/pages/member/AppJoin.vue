@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto my-auto" style="width: 80%;">
+  <div class="container" style="width: 80%; margin-top: 20%;">
     <div class="mb-3 mt-3">
       <h3>아이디</h3>
       <input class="form-control form-control-lg" type="text" placeholder="ID" id="username"
