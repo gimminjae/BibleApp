@@ -3,6 +3,7 @@ package com.bo.member.controller;
 import com.bo.bible.service.BibleService;
 import com.bo.member.dto.JoinDto;
 import com.bo.member.dto.MemberDto;
+import com.bo.member.dto.ModifyPwDto;
 import com.bo.member.entity.MemberContext;
 import com.bo.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,12 @@ public class MemberController {
     @PutMapping("")
     public ResponseEntity<Void> modifyMemInfo(@AuthenticationPrincipal MemberContext memberContext, @RequestBody MemberDto memberDto) {
         memberService.modifyMemInfo(memberContext.getMemberIdx(), memberDto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PutMapping("/modifyPw")
+    public ResponseEntity<Void> modifyMemPw(@AuthenticationPrincipal MemberContext memberContext, @RequestBody ModifyPwDto modifyPwDto) {
+        memberService.modifyMemPw(memberContext.getMemberIdx(), modifyPwDto);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

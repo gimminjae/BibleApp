@@ -3,6 +3,7 @@ package com.bo.member.service;
 import com.bo.base.config.jwt.provider.JwtProvider;
 import com.bo.member.dto.JoinDto;
 import com.bo.member.dto.MemberDto;
+import com.bo.member.dto.ModifyPwDto;
 import com.bo.member.entity.Member;
 import com.bo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -80,6 +81,22 @@ public class MemberService {
             throw new NullPointerException("회원 정보가 존재하지 않습니다.");
         }
         member.modifyMemInfo(memberDto);
+
+        memberRepository.save(member);
+    }
+
+    public void modifyMemPw(Long memberIdx, ModifyPwDto modifyPwDto) {
+        Member member = memberRepository.findById(memberIdx).orElse(null);
+        if(member == null) {
+            throw new NullPointerException("회원 정보가 존재하지 않습니다.");
+        }
+        if(!passwordEncoder.matches(modifyPwDto.getOldPassword(), member.getPassword())) {
+            throw new AccessDeniedException("기존 비밀번호가 틀렸습니다.");
+        }
+        if(!modifyPwDto.getPassword1().equals(modifyPwDto.getPassword2())) {
+            throw new AccessDeniedException("비밀번호가 일치하지 않습니다.");
+        }
+        member.setPassword(passwordEncoder.encode(modifyPwDto.getPassword1()));
 
         memberRepository.save(member);
     }
