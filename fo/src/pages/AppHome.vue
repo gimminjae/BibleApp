@@ -15,7 +15,7 @@
       <div class="input-group mb-3">
         <button class="btn btn-outline-info" type="button" @click="createBibleChart" id="button-addon1">읽기표 만들기</button>
         <input type="text" class="form-control" placeholder="나만의 읽기표를 만들어 보세요!"
-               aria-label="Example text with button addon" aria-describedby="button-addon1" v-model="bibleChartName">
+               aria-label="Example text with button addon" aria-describedby="button-addon1" id="bibleChart" v-model="bibleChartName">
       </div>
     </div>
     <div>
@@ -75,7 +75,7 @@ export default {
     createBibleChart() {
       if (this.bibleChartName.trim().length == 0) {
         alert('읽기표 이름을 입력하세요');
-        document.getElementById('bibleChartName').focus();
+        document.getElementById('bibleChart').focus();
         return;
       }
       axios.post(`/api/biblechart`, {chartName: this.bibleChartName}, {

@@ -1,6 +1,13 @@
 <template>
   <div class="container" style="margin-top: 20%;">
-    <div>목표 & 달성</div>
+    <div class="d-flex justify-content-between">
+      <div>
+        목표 & 달성
+      </div>
+      <div>
+        <button class="btn btn-warning" @click="setGoal">목표 설정</button>
+      </div>
+    </div>
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" :class="{active: isOld}" @click="changeVersion('old')" aria-current="page" href="#">구약</a>
@@ -19,6 +26,7 @@
 import axios from "axios";
 import AppCard from "@/components/AppCard.vue";
 import VueCookies from "vue-cookies";
+import router from "@/script/router";
 
 export default {
   name: "AppBibleChartDetail",
@@ -35,8 +43,8 @@ export default {
     }
   },
   methods: {
-    onGoal() {
-      this.isGoal = !this.isGoal;
+    setGoal() {
+      router.push({path:`/setGoal`})
     },
     changeVersion(version) {
       if(version === "old") {

@@ -7,6 +7,7 @@ import AppBibleChartDetail from "@/pages/AppBibleChartDetail.vue";
 import UserPage from "@/pages/member/UserPage.vue";
 import ModifyMemInfo from "@/pages/member/modifyMemInfo.vue";
 import ModifyMemPw from "@/pages/member/modifyMemPw.vue";
+import SetGoal from "@/pages/biblechart/SetGoal.vue";
 
 
 const routes = [
@@ -42,6 +43,12 @@ const routes = [
     },
     {
         path: '/modify/memberInfo', component: ModifyMemInfo,
+        meta: {
+            roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
+    },
+    {
+        path: '/setGoal', component: SetGoal,
         meta: {
             roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
         }
