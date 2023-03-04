@@ -19,7 +19,7 @@
       </div>
     </div>
     <div>
-      <div v-for="bibleChart in bibleChartList" :key="bibleChart">
+      <div v-for="bibleChart in bibleChartList" :key="bibleChart" class="mb-3">
         <router-link :to="{path: `/bibleChart/${bibleChart.bibleChartIdx}`}"
                      style="text-decoration: none; color: black;">
           <div class="card">
