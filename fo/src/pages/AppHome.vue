@@ -61,7 +61,7 @@ export default {
       if(type === 'info') {
         router.push({path:`/modify/memberInfo`})
       } else if(type === 'pw') {
-        router.push({path:`/member/memberPw`})
+        router.push({path:`/modify/memberPw`})
       }
     },
     getMember() {

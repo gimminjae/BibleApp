@@ -59,6 +59,21 @@ export default {
       })
     },
     modify() {
+      if (this.member.name.trim().length == 0) {
+        alert('이름을 입력하세요');
+        document.getElementById('MemberName').focus();
+        return;
+      }
+      if (this.member.deptName.trim().length == 0) {
+        alert('부서를 입력하세요');
+        document.getElementById('dept').focus();
+        return;
+      }
+      if (this.member.gender.trim().length == 0) {
+        alert('성별을 입력하세요');
+        document.getElementById('gender').focus();
+        return;
+      }
       axios.put(`/api/member`, this.member, {headers: {"Authorization": VueCookies.get('access_token')}})
           .then(() => {
             alert('회원 정보가 변경되었습니다.');
