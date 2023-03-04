@@ -12,4 +12,6 @@ public interface BibleRepository extends JpaRepository<Bible, Long> {
     List<Bible> findByMemIdxOrderBySequence(Long memberIdx);
 
     List<Bible> findByMemIdxAndVersionOrderBySequence(Long memberIdx, String version);
+
+    List<Bible> findByBibleChartIdxAndVersionOrderBySequence(Long bibleChartIdx, String version);
 }

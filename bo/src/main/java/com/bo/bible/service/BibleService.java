@@ -46,4 +46,8 @@ public class BibleService {
     public BibleDto getByBibleIdx(Long bibleIdx) {
         return bibleRepository.findById(bibleIdx).orElse(null).toDto();
     }
+
+    public List<BibleDto> getBibleListByBibleChartIdx(Long bibleChartIdx, String version) {
+        return bibleRepository.findByBibleChartIdxAndVersionOrderBySequence(bibleChartIdx, version).stream().map(Bible::toDto).toList();
+    }
 }

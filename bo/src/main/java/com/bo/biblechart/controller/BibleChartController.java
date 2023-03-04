@@ -72,7 +72,7 @@ public class BibleChartController {
     }
     @GetMapping("/{bibleChartIdx}")
     public ResponseEntity<List<BibleDto>> getBibleListByChartIdx(@AuthenticationPrincipal MemberContext memberContext, @PathVariable Long bibleChartIdx, @RequestParam String version) {
-        return new ResponseEntity<>(bibleService.getBibleListByMember(memberContext.getMemberIdx(), version), HttpStatus.OK);
+        return new ResponseEntity<>(bibleService.getBibleListByBibleChartIdx(bibleChartIdx, version), HttpStatus.OK);
     }
     @PostMapping("/save/{bibleIdx}")
     public ResponseEntity<Object> saveReadBible(@AuthenticationPrincipal MemberContext memberContext,
