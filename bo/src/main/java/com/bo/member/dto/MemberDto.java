@@ -17,6 +17,7 @@ public class MemberDto {
     private String name;
     private String gender;
     private String role;
+    private String deptName;
 
     public Member toEntity() {
         return Member.builder()
@@ -27,6 +28,7 @@ public class MemberDto {
                 .name(this.getName())
                 .gender(this.getGender())
                 .role(this.getRole())
+                .deptName(this.getDeptName())
                 .build();
     }
 }

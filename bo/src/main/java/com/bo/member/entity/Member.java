@@ -25,6 +25,7 @@ public class Member {
     private String username;
     private String password;
     private Long deptIdx;
+    private String deptName;
     private String name;
     private String gender;
     private String role;
@@ -38,6 +39,7 @@ public class Member {
                 .name(this.getName())
                 .gender(this.getGender())
                 .role(this.getRole())
+                .deptName(this.getDeptName())
                 .build();
     }
     public static Member from(JoinDto joinDto) {
@@ -46,6 +48,7 @@ public class Member {
                 .deptIdx(null)
                 .name(joinDto.getName())
                 .gender(joinDto.getGender())
+                .deptName(joinDto.getDeptName())
                 .role(joinDto.getUsername().equals("ADMIN") ? "ADMIN" : "MEMBER")
                 .build();
     }
@@ -73,5 +76,32 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void modifyMemInfo(MemberDto memberDto) {
+        this.setDeptIdx(memberDto.getDeptId());
+        this.setDeptName(memberDto.getDeptName());
+        this.setName(memberDto.getName());
+        this.setGender(memberDto.getGender());
+    }
+
+    public void setDeptIdx(Long deptIdx) {
+        this.deptIdx = deptIdx;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -8,7 +8,7 @@
         <router-link class="nav-link active" aria-current="page" href="#" to="/home">성경</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">회원</a>
+        <router-link :to="{path:`/member/${$store.state.user.id}`}" class="nav-link active" aria-current="page" href="#">내 정보</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" @click="logout" v-if="$store.state.user.id" href="#">로그아웃</a>

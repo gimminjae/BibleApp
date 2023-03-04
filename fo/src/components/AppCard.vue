@@ -65,8 +65,8 @@ export default {
             axios.get(`/api/bible/single/${this.bible.bibleIdx}`, config)
                 .then(({data}) => {
                   this.setBible(data);
-                  this.readList = data.readList;
                   this.showBool = true;
+                  this.readList = data.readList;
                 })
           }).catch(error => {
         console.log(error);

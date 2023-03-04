@@ -66,4 +66,21 @@ public class MemberService {
     public List<MemberDto> getAll() {
         return memberRepository.findAll().stream().map(Member::toDto).toList();
     }
+
+    public MemberDto getByMemberIdx(Long memberIdx) {
+        return memberRepository.findById(memberIdx).orElse(null).toDto();
+    }
+
+    public void modifyMemInfo(Long memberIdx, MemberDto memberDto) {
+        if(memberIdx != memberDto.getMemberIdx()) {
+            throw new AccessDeniedException("변경할 권한이 없습니다.");
+        }
+        Member member = memberRepository.findById(memberIdx).orElse(null);
+        if(member == null) {
+            throw new NullPointerException("회원 정보가 존재하지 않습니다.");
+        }
+        member.modifyMemInfo(memberDto);
+
+        memberRepository.save(member);
+    }
 }

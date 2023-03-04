@@ -25,11 +25,17 @@ public class MemberController {
 
     @PostMapping("")
     public ResponseEntity<Void> createMember(@RequestBody JoinDto joinDto) {
-        MemberDto memberDto = memberService.create(joinDto);
+        memberService.create(joinDto);
 
-//        bibleService.addBiblesAtMember(memberDto.getMemberIdx());
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
+
+    @GetMapping("")
+    public ResponseEntity<MemberDto> getMember(@AuthenticationPrincipal MemberContext memberContext) {
+        return new ResponseEntity<>(memberService.getByMemberIdx(memberContext.getMemberIdx()), HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody MemberDto loginDto) {
         MemberDto memberDto = memberService.login(loginDto.getUsername(), loginDto.getPassword());
@@ -42,6 +48,12 @@ public class MemberController {
         map.put("memName", memberDto.getName());
 
         return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    @PutMapping("")
+    public ResponseEntity<Void> modifyMemInfo(@AuthenticationPrincipal MemberContext memberContext, @RequestBody MemberDto memberDto) {
+        memberService.modifyMemInfo(memberContext.getMemberIdx(), memberDto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/me")

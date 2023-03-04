@@ -4,6 +4,9 @@ import AppHome from "@/pages/AppHome";
 import AppJoin from "@/pages/member/AppJoin.vue";
 import store from "@/script/store";
 import AppBibleChartDetail from "@/pages/AppBibleChartDetail.vue";
+import UserPage from "@/pages/member/UserPage.vue";
+import ModifyMemInfo from "@/pages/member/modifyMemInfo.vue";
+import ModifyMemPw from "@/pages/member/modifyMemPw.vue";
 
 
 const routes = [
@@ -24,12 +27,32 @@ const routes = [
         meta: {
             roles: ['UNKNOWN', '']
         }
-    }, {
+    },
+    {
         path: '/bibleChart/:bibleChartIdx', component: AppBibleChartDetail,
         meta: {
             roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
         }
     },
+    {
+        path: '/member/:memberIdx', component: UserPage,
+        meta: {
+            roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
+    },
+    {
+        path: '/modify/memberInfo', component: ModifyMemInfo,
+        meta: {
+            roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
+    },
+    {
+        path: '/modify/memberPw', component: ModifyMemPw,
+        meta: {
+            roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
+    },
+
 
 ]
 const router = createRouter({
@@ -44,7 +67,6 @@ router.beforeEach((to, from, next) => {
             roleStatus = '';
         }
         if (!to.meta.roles.includes(roleStatus)) {
-            console.log(to.meta.roles);
             console.log('권한 문제');
             next(from)
         } else {

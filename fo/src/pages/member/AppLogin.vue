@@ -86,10 +86,11 @@ export default {
                   }
 
                   //로그인 후 홈페이지로 이동
-                  router.push({path: `/home`});
+                  router.replace({path: `/home`});
                 })
-                .catch(() => {
-                      router.push({path: '/'});
+                .catch((error) => {
+                      // router.push({path: '/'});
+                  alert(error.data);
                     }
                 );
           })
