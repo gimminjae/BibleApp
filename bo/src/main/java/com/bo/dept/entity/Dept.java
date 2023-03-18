@@ -23,15 +23,15 @@ public class Dept {
     private String deptName;
     private String year;
     private int deptMemCount;
-    @OneToMany
-    private List<Member> coreMem;
+//    @OneToMany
+//    private List<Member> coreMem;
     public DeptDto toDto() {
         return DeptDto.builder()
                 .deptIdx(this.getDeptIdx())
                 .deptName(this.getDeptName())
                 .year(this.getYear())
                 .deptMemCount(this.getDeptMemCount())
-                .coreMem(this.getCoreMem().stream().map(Member::toDto).toList())
+//                .coreMem(this.getCoreMem().stream().map(Member::toDto).toList())
                 .build();
     }
 }

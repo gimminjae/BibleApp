@@ -17,5 +17,5 @@ public class DeptDto {
     private String deptName;
     private String year;
     private int deptMemCount;
-    private List<MemberDto> coreMem;
+//    private List<MemberDto> coreMem;
 }

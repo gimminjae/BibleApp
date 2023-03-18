@@ -9,6 +9,7 @@ import ModifyMemInfo from "@/pages/member/modifyMemInfo.vue";
 import ModifyMemPw from "@/pages/member/modifyMemPw.vue";
 import SetGoal from "@/pages/biblechart/SetGoal.vue";
 import VueCookies from "vue-cookies";
+import AdminHome from "@/pages/admin/AdminHome.vue";
 
 
 const routes = [
@@ -58,6 +59,12 @@ const routes = [
         path: '/modify/memberPw', component: ModifyMemPw,
         meta: {
             roles: ['MEMBER', 'ADMIN', 'SUBADMIN']
+        }
+    },
+    {
+        path: '/admin', component: AdminHome,
+        meta: {
+            roles: ['ADMIN']
         }
     },
 

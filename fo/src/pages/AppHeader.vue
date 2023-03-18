@@ -2,7 +2,7 @@
   <navbar class="container-fluid navbar-fixed-bottom" v-if="$store.state.user.id">
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <router-link class="nav-link active" aria-current="page" to="/admin" href="#">관리자</router-link>
       </li>
       <li class="nav-item">
         <router-link class="nav-link active" aria-current="page" href="#" to="/home">성경</router-link>
