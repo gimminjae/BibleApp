@@ -22,6 +22,7 @@ public class Bible {
     private Integer sequence;
     private String bibleName;
     private Integer totalCount;
+    @Column(columnDefinition = "LONGTEXT")
     private String readString;
     private Integer readCount;
     private Integer readPercent;
