@@ -82,4 +82,11 @@ public class BibleChartController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @DeleteMapping("/{bibleChartIdx}")
+    public ResponseEntity<Void> removeBibleChart(@AuthenticationPrincipal MemberContext memberContext, @PathVariable long bibleChartIdx) {
+        //삭제
+        bibleChartService.remove(memberContext.getMemberIdx(), bibleChartIdx);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

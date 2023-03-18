@@ -4,8 +4,9 @@
       <div>
         목표 & 달성
       </div>
-      <div>
+      <div class="d-flex gap-2">
         <button class="btn btn-warning" @click="setGoal">목표 설정</button>
+        <button class="btn btn-light" @click="removeBibleChart">삭제</button>
       </div>
     </div>
     <ul class="nav nav-tabs">
@@ -43,6 +44,21 @@ export default {
     }
   },
   methods: {
+    removeBibleChart() {
+      if(!confirm('삭제하시겠습니까?')) {
+        return;
+      }
+      axios.delete(`/api/biblechart/${this.bibleChartIdx}`, {
+        headers: {
+          "Authorization": VueCookies.get('access_token')
+        }
+      }).then(() => {
+        alert('삭제되었습니다.');
+        router.replace('/home');
+      }).catch(error => {
+        alert(error.response.data);
+      })
+    },
     setGoal() {
       router.push({path:`/setGoal`})
     },

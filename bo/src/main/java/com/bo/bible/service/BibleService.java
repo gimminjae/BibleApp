@@ -50,4 +50,10 @@ public class BibleService {
     public List<BibleDto> getBibleListByBibleChartIdx(Long bibleChartIdx, String version) {
         return bibleRepository.findByBibleChartIdxAndVersionOrderBySequence(bibleChartIdx, version).stream().map(Bible::toDto).toList();
     }
+
+    public void removeByBibleChartIdx(Long bibleChartIdx) {
+        List<Bible> bibleList = bibleRepository.findByBibleChartIdx(bibleChartIdx);
+
+        bibleList.stream().forEach(i -> bibleRepository.delete(i));
+    }
 }
