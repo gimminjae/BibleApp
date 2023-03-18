@@ -34,7 +34,15 @@ import store from "@/script/store";
 export default {
   name: "AppLogin",
   components: {},
+  mounted() {
+    this.preLogin();
+  },
   methods: {
+    preLogin() {
+      if(VueCookies.get('access_token')) {
+        router.replace({path: '/home'});
+      }
+    },
     join() {
       router.push('/join');
     },
